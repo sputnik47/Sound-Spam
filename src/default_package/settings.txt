@@ -1,0 +1,3 @@
+silent = false
+interval = 15
+volume = 0
