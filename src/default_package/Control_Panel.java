@@ -16,15 +16,20 @@ public class Control_Panel extends JFrame {
 	public void open_cpanel(){
 	
 	//variables
-	File_Edit save_file = new File_Edit();
+	String current_sound = "sample_sound.wav";
+	Sound audio = new Sound();
+	
+	Save_Edit save = new Save_Edit();
 		
 	JLabel label = new JLabel();//label for everything to go on
 	
-	JButton save = new JButton("Save");//buttons and etc
-	JButton start = new JButton("Start");
+	JButton save_b = new JButton("Save");//buttons and etc
+	JButton start_b = new JButton("Start");
+	JButton t_sound_b = new JButton("Play");
+	JButton set_sound_b = new JButton("Select Audio");
 	JCheckBox silent_startup = new JCheckBox("Silent Startup");
 	
-	JSlider volume = new JSlider(-6, 6, 0); //sliders
+	JSlider volume = new JSlider(-24, 6, 0); //sliders
 	JSlider interval = new JSlider(1, 120, 15);
 	
 	JLabel volume_label = new JLabel("Volume: 0.0f"); //labels
@@ -42,24 +47,28 @@ public class Control_Panel extends JFrame {
 	
 	//location and size
 	silent_startup.setBounds(10, 10, 125, 25);
-	save.setBounds(10, 140, 80, 25);
-	start.setBounds(205, 140, 80, 25);
+	save_b.setBounds(10, 140, 80, 25);
+	start_b.setBounds(205, 140, 80, 25);
 	interval.setLocation(5, 45);
 	interval.setSize(150, 40);
 	interval_label.setBounds(165, 55, 125, 20);
 	volume.setLocation(5, 90);
-	volume.setSize(150, 40);
-	volume_label.setBounds(165, 100, 100, 20);
+	volume.setSize(100, 40);
+	volume_label.setBounds(115, 100, 100, 20);
+	t_sound_b.setBounds(205, 100, 80, 25);
+	set_sound_b.setBounds(155, 10, 130, 25);
 	
 	//adding onto frame
 	add(label);
 	label.add(silent_startup);
 	label.add(interval);
 	label.add(interval_label);
-	label.add(save);
-	label.add(start);
+	label.add(save_b);
+	label.add(start_b);
 	label.add(volume);
 	label.add(volume_label);
+	label.add(t_sound_b);
+	label.add(set_sound_b);
 	
 	//action events
 	
@@ -78,9 +87,22 @@ public class Control_Panel extends JFrame {
 		}
 	});
 	
-	save.addActionListener(new ActionListener(){
+	save_b.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-			System.out.println(save_file.readSave(0));
+			System.out.println(save.readSave(0));
+		}
+	});
+	
+	t_sound_b.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			audio.playSound(current_sound, volume.getValue());
+		}
+	});
+	
+	set_sound_b.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			File_Chooser fc = new File_Chooser();
+			fc.open_file_chooser();
 		}
 	});
 	
