@@ -1,3 +1,4 @@
 silent = false
 interval = 15
 volume = 0
+sound_dir = null

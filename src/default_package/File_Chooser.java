@@ -9,7 +9,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class File_Chooser extends JFrame{
 
-	public void open_file_chooser(){
+	public String open_file_chooser(){
 		//variables
 		JFileChooser chooser = new JFileChooser();
 		JButton open_b = new JButton();
@@ -28,10 +28,11 @@ public class File_Chooser extends JFrame{
 		
 		
 		if (chooser.showOpenDialog(open_b) == JFileChooser.APPROVE_OPTION){
-			System.out.println(chooser.getSelectedFile().getAbsolutePath());
+			return chooser.getSelectedFile().getAbsolutePath();
 		}
 		
-		
+		else 
+			return null;
 		
 	}
 }

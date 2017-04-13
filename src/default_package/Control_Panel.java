@@ -16,10 +16,12 @@ public class Control_Panel extends JFrame {
 	public void open_cpanel(){
 	
 	//variables
-	String current_sound = "sample_sound.wav";
-	Sound audio = new Sound();
-	
 	Save_Edit save = new Save_Edit();
+	
+	String default_sound = "sample_sound.wav";
+	String current_sound = save.readSave(3);
+	System.out.println(current_sound);
+	Sound audio = new Sound();
 		
 	JLabel label = new JLabel();//label for everything to go on
 	
@@ -74,6 +76,7 @@ public class Control_Panel extends JFrame {
 	
 	interval.addChangeListener(new ChangeListener(){
 		public void stateChanged(ChangeEvent ce) {
+			
 			if (interval.getValue() == 1)
 				interval_label.setText("Every Minute");
 			else
@@ -83,24 +86,31 @@ public class Control_Panel extends JFrame {
 	
 	volume.addChangeListener(new ChangeListener(){
 		public void stateChanged(ChangeEvent ce) {
+			
 			volume_label.setText("Volume: "+ volume.getValue() + ".0f");
 		}
 	});
 	
 	save_b.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
+			
 			System.out.println(save.readSave(0));
 		}
 	});
 	
 	t_sound_b.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-			audio.playSound(current_sound, volume.getValue());
+			
+			if (current_sound.equals(null))
+				audio.playSound(current_sound, volume.getValue());
+			else
+				audio.playSound(default_sound, volume.getValue());
 		}
 	});
 	
 	set_sound_b.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
+			
 			File_Chooser fc = new File_Chooser();
 			fc.open_file_chooser();
 		}
