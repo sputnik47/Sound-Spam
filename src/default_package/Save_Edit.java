@@ -98,6 +98,8 @@ public class Save_Edit {
 				writeText.println("interval = 15");
 				writeText.println("volume = 0");
 				writeText.println("sound_dir = null");
+				writeText.println("cpanel_open = false");
+				writeText.println("run_sound = false");
 				writeText.close();
 				System.out.println("File Not Found");}
 			

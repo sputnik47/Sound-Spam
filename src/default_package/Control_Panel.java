@@ -3,6 +3,10 @@ package default_package;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -12,14 +16,13 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class Control_Panel extends JFrame {
+public class Control_Panel extends JFrame{
 
 	public void open_cpanel(){
 	
 	//variables
 	Save_Edit save = new Save_Edit();
 	Sound audio = new Sound();
-	save.writeNewSave(); //makes a default save file if one is not located
 	
 	String default_sound = "sample_sound.wav";
 	
@@ -113,13 +116,23 @@ public class Control_Panel extends JFrame {
 	});
 	
 	//action listeners
+	start_b.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			save.writeSave(1, String.valueOf(silent_startup.isSelected()));
+			save.writeSave(2, String.valueOf(interval.getValue()));
+			save.writeSave(3, String.valueOf(volume.getValue()));
+			save.writeSave(5, "false");
+			save.writeSave(6, "true");//tells program to start sound
+			dispose();
+		}
+	});
+	
 	save_b.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 			
 			save.writeSave(1, String.valueOf(silent_startup.isSelected()));
 			save.writeSave(2, String.valueOf(interval.getValue()));
 			save.writeSave(3, String.valueOf(volume.getValue()));
-			System.out.println(save.readSave(0));
 		}
 	});
 	
@@ -158,7 +171,15 @@ public class Control_Panel extends JFrame {
 		}
 	});
 	
+	addWindowListener(new WindowAdapter()
+	{
+	    public void windowClosing(WindowEvent e){
+	    save.writeSave(5, "false");
+	    }
+	});
+	
 	setVisible(true);
+	
 	
 	}
 	
@@ -169,5 +190,7 @@ public class Control_Panel extends JFrame {
 			return save.short_file_dir(save.readSave(4));
 		else
 			return "Nothing";}
+
+	
 	
 }
