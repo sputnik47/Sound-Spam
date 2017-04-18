@@ -23,8 +23,8 @@ public class Launcher {
 		
 		System.out.println("Running...");
 		if(save.readSave(6).equals("true") || save.readSave(1).equals("true")){
-			save.writeSave(6, "false");
 			ghost.start();
+			save.writeSave(6, "false");
 			}
 			
 			
