@@ -13,7 +13,16 @@ public class Ghost_Sound {
 		String sound_file = save.readSave(4);
 		int volume = Integer.valueOf(save.readSave(3));
 		int interval = Integer.valueOf(save.readSave(2));
+		int time = Integer.valueOf(save.readSave(7));
 		boolean def_audio;
+		
+		
+		if (interval == 0)//milliseconds multiplier
+			interval = 1;
+		else if (interval == 1)//seconds multiplier
+			interval = 1000;
+		else //minutes multiplier
+			interval = 60000;
 		
 		
 		if (save.readSave(4).equals("null")) //sees if a audio clip is chosen
@@ -21,12 +30,12 @@ public class Ghost_Sound {
 		else
 			def_audio = false;
 		
-		
+		int wait = interval * time;
+		System.out.println(wait);
 		
 		while(true){
-			for(int min = 0; min < interval; min++){
-				Thread.sleep(60000);
-				System.out.println(min + 1);}
+
+			Thread.sleep(wait);
 			if (def_audio == false)
 				audio.playSound_ext(sound_file, volume);
 			else

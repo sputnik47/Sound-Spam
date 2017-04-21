@@ -25,7 +25,8 @@ public class Save_Edit {
 			
 			line_text = br.readLine();
 			String[] variableArray = line_text.split(" ");
-
+			br.close();
+			
 			return variableArray[2];
 			
 		} catch (IOException e) {
@@ -95,16 +96,16 @@ public class Save_Edit {
 			else{
 				PrintWriter writeText = new PrintWriter(getDir() + "/settings.txt", "UTF-8");
 				writeText.println("silent = false");
-				writeText.println("interval = 15");
+				writeText.println("interval = 0");
 				writeText.println("volume = 0");
 				writeText.println("sound_dir = null");
 				writeText.println("cpanel_open = false");
 				writeText.println("run_sound = false");
+				writeText.println("time = 500");
 				writeText.close();
 				System.out.println("File Not Found");}
 			
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
