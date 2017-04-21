@@ -21,7 +21,7 @@ public class Control_Panel extends JFrame{
 
 	public void open_cpanel(){
 	
-	//variables
+	//variables and class calling
 	Save_Edit save = new Save_Edit();
 	Sound audio = new Sound();
 	
@@ -29,26 +29,27 @@ public class Control_Panel extends JFrame{
 	
 	JLabel label = new JLabel();//label for everything to go on
 	
-	JButton save_b = new JButton("Save");//buttons and etc
-	JButton start_b = new JButton("Start");
-	JButton play_sound_b = new JButton("Play \u25B6");
+	JCheckBox silent_startup = new JCheckBox("Silent Startup"); //buttons and etc
 	JButton select_audio_b = new JButton("Select Audio");
+	JButton play_sound_b = new JButton("Play \u25B6");
+	JButton start_b = new JButton("Start");
+	JButton save_b = new JButton("Save");
 	JButton reset = new JButton("Reset");
-	JCheckBox silent_startup = new JCheckBox("Silent Startup");
 	
 	JSlider volume = new JSlider(-24, 6, 0); //sliders
 	
-	String[] time_intervals = {"Milliseconds", "Seconds", "Minutes"};
+	String[] time_intervals = {"Milliseconds", "Seconds", "Minutes"};//interval selection
 	JComboBox<?> interval = new JComboBox<Object>(time_intervals);
 	JTextField time = new JTextField("500");
 	
-	JLabel border = new JLabel("_________________________________________");//labels
-	JLabel selected_audio_text = new JLabel("Selected Audio File:", SwingConstants.CENTER);
+	JLabel selected_audio_text = new JLabel("Selected Audio File:", SwingConstants.CENTER);//labels
 	JLabel selected_audio = new JLabel(sound_saved(), SwingConstants.CENTER);
+	JLabel border = new JLabel("_________________________________________");
 	JLabel volume_label = new JLabel("Volume: 0.0f");
 	JLabel interval_label = new JLabel("Interval:");
 	
 	Dimension window_size = new Dimension(300, 300); //dimensions
+	
 	
 	//updating to saved values
 	silent_startup.setSelected(Boolean.valueOf(save.readSave(1)));
@@ -65,23 +66,20 @@ public class Control_Panel extends JFrame{
 	setSize(window_size);
 	
 	//location and size
-	silent_startup.setBounds(10, 10, 125, 25);
+	time.setBounds(108, 55, 70, 25);
+	reset.setBounds(108, 140, 80, 25);
+	volume.setBounds(98, 90, 100, 40);
 	save_b.setBounds(10, 140, 80, 25);
+	border.setBounds(3, 160, 350, 25);
 	start_b.setBounds(205, 140, 80, 25);
-	interval_label.setBounds(45, 57, 100, 20);
-	interval.setLocation(185, 55);
-	interval.setSize(100, 25);
-	time.setLocation(108, 55);
-	time.setSize(70, 25);
-	volume.setLocation(98, 90);
-	volume.setSize(100, 40);
+	interval.setBounds(185, 55, 100, 25);
 	volume_label.setBounds(15, 100, 100, 20);
 	play_sound_b.setBounds(205, 100, 80, 25);
+	silent_startup.setBounds(10, 10, 125, 25);
+	interval_label.setBounds(45, 57, 100, 20);
 	select_audio_b.setBounds(155, 10, 130, 25);
-	selected_audio_text.setBounds(50, 195, 200, 25);
-	border.setBounds(3, 160, 350, 25);
 	selected_audio.setBounds(50, 225, 200, 25);
-	reset.setBounds(108, 140, 80, 25);
+	selected_audio_text.setBounds(50, 195, 200, 25);
 	
 	//adding onto frame
 	add(label);
@@ -101,7 +99,7 @@ public class Control_Panel extends JFrame{
 	label.add(reset);
 	
 	
-	//action events
+	//***action events***
 	
 	//change listeners
 	volume.addChangeListener(new ChangeListener(){
@@ -207,9 +205,8 @@ public class Control_Panel extends JFrame{
 	});
 	
 	setVisible(true);
+	} //closing of cpanel
 	
-	
-	}
 	
 	//methods
 	public String sound_saved(){

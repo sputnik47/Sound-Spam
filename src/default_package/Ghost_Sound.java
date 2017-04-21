@@ -3,17 +3,16 @@ package default_package;
 public class Ghost_Sound {
 
 	public void start() throws InterruptedException{
-		System.out.println("Ghost Running");
+		System.out.println("Running...");
 		
 		Save_Edit save = new Save_Edit();
 		Sound audio = new Sound();
 		
-		
+		int interval = Integer.valueOf(save.readSave(2));
+		int volume = Integer.valueOf(save.readSave(3));
+		int time = Integer.valueOf(save.readSave(7));
 		String default_sound = "sample_sound.wav";
 		String sound_file = save.readSave(4);
-		int volume = Integer.valueOf(save.readSave(3));
-		int interval = Integer.valueOf(save.readSave(2));
-		int time = Integer.valueOf(save.readSave(7));
 		boolean def_audio;
 		
 		
@@ -30,12 +29,13 @@ public class Ghost_Sound {
 		else
 			def_audio = false;
 		
+		
 		int wait = interval * time;
-		System.out.println(wait);
+		System.out.println("Interval: " + wait + "Milliseconds");
 		
 		while(true){
-
 			Thread.sleep(wait);
+			
 			if (def_audio == false)
 				audio.playSound_ext(sound_file, volume);
 			else
