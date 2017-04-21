@@ -193,6 +193,8 @@ public class Control_Panel extends JFrame{
 			volume.setValue(0);
 			selected_audio.setText("Nothing");
 			silent_startup.setSelected(false);
+			interval.setSelectedIndex(0);
+			time.setText("500");
 			
 		}
 	});
